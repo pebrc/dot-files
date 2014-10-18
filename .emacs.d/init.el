@@ -31,3 +31,7 @@
 
 (add-to-list 'load-path' "~/.emacs.d/lisp")
 (load-library "efuncs")
+(load-library "ekeys")
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+ (setq exec-path (append exec-path (list "/opt/local/bin/" )))
+
