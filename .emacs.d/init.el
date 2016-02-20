@@ -1,22 +1,18 @@
 (require 'package)
 
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
-(defvar my-packages '(clojure-test-mode
+(defvar my-packages '(better-defaults
                       cider
                       clojure-mode
                       pkg-info
                       epl
                       dash
-                      starter-kit-bindings
-                      starter-kit-eshell
-                      starter-kit-lisp
                       elisp-slime-nav
-                      starter-kit
                       magit
-                      git-rebase-mode
-                      git-commit-mode
                       ido-ubiquitous
                       smex
                       find-file-in-project
@@ -32,6 +28,9 @@
 (add-to-list 'load-path' "~/.emacs.d/lisp")
 (load-library "efuncs")
 (load-library "ekeys")
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
- (setq exec-path (append exec-path (list "/opt/local/bin/" )))
+(load-library "hooks")
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+
 
