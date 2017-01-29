@@ -34,9 +34,12 @@
 
 (require 'use-package)
 
+(add-to-list 'load-path' "~/.emacs.d/lisp")
+(load-library "efuncs")
 
 
 ;;(ace-jump-mode auto-complete better-defaults clj-refactor clojure-cheatsheet closure-lint-mode dash-at-point edn elisp-slime-nav ensime company exec-path-from-shell find-file-in-project groovy-mode helm helm-core idle-highlight-mode ido-ubiquitous ido-completing-read+ inflections js2-mode magit git-commit magit-popup markdown-mode+ markdown-mode modeline-posn multiple-cursors paradox hydra paredit peg popup rainbow-delimiters s sbt-mode scala-mode scala-mode2 smex swiper ivy typed-clojure-mode cider seq spinner queue pkg-info epl clojure-mode which-key window-numbering with-editor dash async yasnippet)
+
 
 (use-package cider)
 (use-package elisp-slime-nav)
@@ -45,17 +48,13 @@
 (use-package ido-ubiquitous)
 (use-package paredit
   :init
-  (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript cider-repl))
-    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-              'paredit-mode)))
+  (add-hooks '(scheme emacs-lisp lisp clojure clojurescript cider-repl) 'paredit-mode))
 (use-package company)
 (use-package window-numbering)
 (use-package rainbow-delimiters)
 ;;
 ;; Customizations
 
-(add-to-list 'load-path' "~/.emacs.d/lisp")
-(load-library "efuncs")
 (load-library "ekeys")
 (load-library "hooks")
 (when (memq window-system '(mac ns))

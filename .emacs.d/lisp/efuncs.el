@@ -1,3 +1,7 @@
+(defun add-hooks (modes hook)
+  (dolist (mode modes)
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              hook)))
 ;;
 ;; Never understood why Emacs doesn't have this function. nicked from steveyegge
 ;;
