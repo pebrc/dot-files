@@ -5,6 +5,7 @@
  use-package-verbose t
  shell-file-name "/bin/bash"
  org-directory "~/Dropbox/org"
+ lispy-modes '(scheme emacs-lisp lisp clojure clojurescript cider-repl)
 )
 
 ;; buffer local variables
@@ -52,11 +53,13 @@
 (use-package paredit
   :defer t
   :init
-  (add-hooks '(scheme emacs-lisp lisp clojure clojurescript cider-repl) 'paredit-mode))
+  (add-hooks lispy-modes 'paredit-mode))
 (use-package company)
 (use-package window-numbering)
 (use-package rainbow-delimiters
-  :defer t)
+  :defer t
+  :init
+  (add-hooks lispy-modes 'rainbow-delimiters-mode))
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))
@@ -75,7 +78,8 @@
  ;; If there is more than one, they won't work right.
  '(markdown-command "multimarkdown")
  '(menu-bar-mode nil)
- '(package-selected-packages (quote (ace-jump-mode))))
+ '(package-selected-packages (quote (ace-jump-mode)))
+ '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
