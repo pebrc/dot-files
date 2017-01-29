@@ -41,17 +41,22 @@
 ;;(ace-jump-mode auto-complete better-defaults clj-refactor clojure-cheatsheet closure-lint-mode dash-at-point edn elisp-slime-nav ensime company exec-path-from-shell find-file-in-project groovy-mode helm helm-core idle-highlight-mode ido-ubiquitous ido-completing-read+ inflections js2-mode magit git-commit magit-popup markdown-mode+ markdown-mode modeline-posn multiple-cursors paradox hydra paredit peg popup rainbow-delimiters s sbt-mode scala-mode scala-mode2 smex swiper ivy typed-clojure-mode cider seq spinner queue pkg-info epl clojure-mode which-key window-numbering with-editor dash async yasnippet)
 
 
-(use-package cider)
-(use-package elisp-slime-nav)
-(use-package magit)
+(use-package cider
+  :defer t)
+(use-package elisp-slime-nav
+  :defer t)
+(use-package magit
+  :defer t)
 (use-package smex)
 (use-package ido-ubiquitous)
 (use-package paredit
+  :defer t
   :init
   (add-hooks '(scheme emacs-lisp lisp clojure clojurescript cider-repl) 'paredit-mode))
 (use-package company)
 (use-package window-numbering)
-(use-package rainbow-delimiters)
+(use-package rainbow-delimiters
+  :defer t)
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))
