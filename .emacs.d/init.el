@@ -3,6 +3,8 @@
  inhibit-startup-screen t
  use-package-always-ensure t
  use-package-verbose t
+ shell-file-name "/bin/bash"
+ org-directory "~/Dropbox/org"
 )
 
 ;; buffer local variables
@@ -41,7 +43,11 @@
 (use-package magit)
 (use-package smex)
 (use-package ido-ubiquitous)
-(use-package paredit)
+(use-package paredit
+  :init
+  (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript cider-repl))
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              'paredit-mode)))
 (use-package company)
 (use-package window-numbering)
 (use-package rainbow-delimiters)
