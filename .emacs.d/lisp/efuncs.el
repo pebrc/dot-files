@@ -25,3 +25,20 @@
     (goto-char (point-max))
     (insert form)
     (cider-repl-return)))
+
+(defun cider-figwheel ()
+  (interactive)
+  (save-some-buffers)
+  (with-current-buffer (cider-current-repl-buffer)
+    (goto-char (point-max))
+        (insert "(require 'figwheel-sidecar.repl-api)
+             (figwheel-sidecar.repl-api/start-figwheel!) ; idempotent
+             ;;(figwheel-sidecar.repl-api/cljs-repl)")
+        (cider-repl-return)))
+
+(defun cider-figwheel-repl ()
+  (interactive)
+  (with-current-buffer (cider-current-repl-buffer)
+    (goto-char (point-max))
+    (insert "(figwheel-sidecar.repl-api/cljs-repl)")
+    (cider-repl-return)))

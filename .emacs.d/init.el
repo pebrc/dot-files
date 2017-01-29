@@ -1,27 +1,50 @@
+;; global variables
+(setq
+ inhibit-startup-screen t
+ use-package-always-ensure t
+ use-package-verbose t
+)
+
+;; buffer local variables
+(setq-default
+ indent-tabs-mode nil
+ tab-width 4
+ c-basic-offset 4)
+
+;; modes
+(electric-indent-mode +1)
+
+;; global keybindings
+(global-unset-key (kbd "C-z"))
+
+;; the package manager
 (require 'package)
+(setq
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("melpa" . "http://melpa.org/packages/")
+                    ("melpa-stable" . "http://stable.melpa.org/packages/"))
+ package-archive-priorities '(("melpa-stable" . 1)))
 
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (package-initialize)
-(defvar my-packages '(better-defaults
-                      cider
-                      clojure-mode
-                      pkg-info
-                      epl
-                      dash
-                      elisp-slime-nav
-                      magit
-                      ido-ubiquitous
-                      smex
-                      find-file-in-project
-                      idle-highlight-mode
-                      paredit))
+(unless (package-installed-p 'use-package)
+    (package-install 'use-package))
 
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(require 'use-package)
+
+
+
+;;(ace-jump-mode auto-complete better-defaults clj-refactor clojure-cheatsheet closure-lint-mode dash-at-point edn elisp-slime-nav ensime company exec-path-from-shell find-file-in-project groovy-mode helm helm-core idle-highlight-mode ido-ubiquitous ido-completing-read+ inflections js2-mode magit git-commit magit-popup markdown-mode+ markdown-mode modeline-posn multiple-cursors paradox hydra paredit peg popup rainbow-delimiters s sbt-mode scala-mode scala-mode2 smex swiper ivy typed-clojure-mode cider seq spinner queue pkg-info epl clojure-mode which-key window-numbering with-editor dash async yasnippet)
+
+(use-package cider)
+(use-package elisp-slime-nav)
+(use-package magit)
+(use-package smex)
+(use-package ido-ubiquitous)
+(use-package paredit)
+(use-package company)
+(use-package window-numbering)
+(use-package rainbow-delimiters)
 ;;
 ;; Customizations
 
@@ -34,3 +57,17 @@
 
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(markdown-command "multimarkdown")
+ '(menu-bar-mode nil)
+ '(package-selected-packages (quote (ace-jump-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
