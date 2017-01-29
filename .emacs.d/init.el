@@ -52,13 +52,14 @@
 (use-package company)
 (use-package window-numbering)
 (use-package rainbow-delimiters)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :config (exec-path-from-shell-initialize))
 ;;
 ;; Customizations
 
 (load-library "ekeys")
 (load-library "hooks")
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
 
 
 
