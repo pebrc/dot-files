@@ -1,5 +1,7 @@
 ;;(global-set-key (kbd "C-`")  'cider-eval-expression-at-point-in-repl)
 
+(global-set-key (kbd "<f5>") 'replace-last-sexp)
+
 ;;Mac OS X iterm/tmux weirdness
 (when (and (string= "darwin" system-type)
            (not (memq window-system '(mac ns))))

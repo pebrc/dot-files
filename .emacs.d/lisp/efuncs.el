@@ -2,6 +2,12 @@
   (dolist (mode modes)
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
               hook)))
+
+(defun replace-last-sexp ()
+    (interactive)
+    (let ((value (eval (preceding-sexp))))
+      (kill-sexp -1)
+      (insert (format "%S" value))))
 ;;
 ;; Never understood why Emacs doesn't have this function. nicked from steveyegge
 ;;
