@@ -1,6 +1,10 @@
 ;;(global-set-key (kbd "C-`")  'cider-eval-expression-at-point-in-repl)
 
 (global-set-key (kbd "<f5>") 'replace-last-sexp)
+(global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;;Mac OS X iterm/tmux weirdness
 (when (and (string= "darwin" system-type)
