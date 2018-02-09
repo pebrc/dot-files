@@ -26,7 +26,8 @@
  package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                     ("org" . "http://orgmode.org/elpa/")
                     ("melpa" . "http://melpa.org/packages/")
-                    ("melpa-stable" . "http://stable.melpa.org/packages/"))
+                    ("melpa-stable" . "http://stable.melpa.org/packages/")
+                    ("elpy" . "http://jorgenschaefer.github.io/packages/"))
  package-archive-priorities '(("melpa-stable" . 1)))
 
 (package-initialize)
@@ -52,13 +53,13 @@
 (use-package magit
   :defer t)
 (use-package smex)
-(use-package ido-ubiquitous)
+(use-package ido-completing-read+)
 (use-package paredit
   :defer t
   :init
   (add-hooks lispy-modes 'paredit-mode))
 (use-package company)
-(use-package window-numbering)
+;(use-package window-numbering)
 (use-package rainbow-delimiters
   :defer t
   :init
@@ -68,6 +69,7 @@
   :config (exec-path-from-shell-initialize))
 (use-package markdown-mode)
 (use-package ensime
+  :disabled
   :ensure t
   :pin melpa-stable)
 
@@ -75,9 +77,47 @@
   :interpreter
   ("scala" . scala-mode))
 
+(use-package etags-select
+  :commands etags-select-find-tag)
+
 (use-package multiple-cursors)
 (use-package json-mode)
 (use-package restclient)
+
+(use-package python
+  :ensure t
+  :defer t
+  :mode ("\\.py\\'" . python-mode))
+
+(use-package elpy
+  :ensure t
+  :init (with-eval-after-load 'python (elpy-enable))
+  :after python
+  :config (elpy-enable))
+
+(use-package smartparens
+  :diminish smartparens-mode
+  :commands
+  smartparens-strict-mode
+  smartparens-mode
+  sp-restrict-to-pairs-interactive
+  sp-local-pair
+  :init
+  (setq sp-interactive-dwim t)
+  :config
+  (require 'smartparens-config)
+  (sp-use-smartparens-bindings)
+
+  (sp-pair "(" ")" :wrap "C-(") ;; how do people live without this?
+  (sp-pair "[" "]" :wrap "s-[") ;; C-[ sends ESC
+  (sp-pair "{" "}" :wrap "C-{")
+
+  ;; WORKAROUND https://github.com/Fuco1/smartparens/issues/543
+  (bind-key "C-<left>" nil smartparens-mode-map)
+  (bind-key "C-<right>" nil smartparens-mode-map)
+
+  (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
+  (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
 
 ;;
 ;; Customizations
@@ -93,12 +133,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ensime-typecheck-idle-interval 1.5)
+ '(gnutls-trustfiles
+   (quote
+    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/Users/p_brc/Desktop/elastic-ce-aws.crt")))
+ '(gnutls-verify-error (quote ((".*" nil))))
  '(linum-format "%4d │")
  '(markdown-command "multimarkdown")
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
+    (terraform-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
