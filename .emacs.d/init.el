@@ -59,7 +59,14 @@
   :init
   (add-hooks lispy-modes 'paredit-mode))
 (use-package company)
-;(use-package window-numbering)
+(use-package company-go
+  :defer t
+  :init
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-go)))
+
+(use-package window-numbering)
+
 (use-package rainbow-delimiters
   :defer t
   :init
@@ -69,8 +76,6 @@
   :config (exec-path-from-shell-initialize))
 (use-package markdown-mode)
 (use-package ensime
-  :disabled
-  :ensure t
   :pin melpa-stable)
 
 (use-package scala-mode
@@ -83,6 +88,36 @@
 (use-package multiple-cursors)
 (use-package json-mode)
 (use-package restclient)
+(use-package racer)
+(use-package rust-mode
+  :bind (:map rust-mode-map
+              ("TAB" . company-indent-or-complete-common))
+  :init
+  (setq company-tooltip-align-annotations t)
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+(use-package go-mode
+  :ensure t
+  :bind (:map go-mode-map
+         ("M-." . godef-jump))
+  :config
+  (add-hook 'before-save-hook #'gofmt-before-save))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package org-tree-slide
+  :after (org)
+  :bind (:map org-mode-map
+              ("<f8>" . org-tree-slide-mode)
+              ("S-<f8>" . org-tree-slide-skip-done-toggle)
+              :map org-tree-slide-mode-map
+              ("C-<right>" . org-tree-slide-move-next-tree)
+              ("C-<left>" . org-tree-slide-move-previous-tree))
+  :init
+  (org-tree-slide-simple-profile))
 
 (use-package python
   :ensure t
