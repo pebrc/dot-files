@@ -6,6 +6,7 @@
  shell-file-name "/bin/bash"
  org-directory "~/Dropbox/org"
  lispy-modes '(scheme emacs-lisp lisp clojure clojurescript cider-repl)
+ inf-clojure-program "planck"
 )
 
 ;; buffer local variables
@@ -172,12 +173,14 @@
    (quote
     ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/Users/p_brc/Desktop/elastic-ce-aws.crt")))
  '(gnutls-verify-error (quote ((".*" nil))))
+ '(inf-clojure-lein-cmd "planck -c src")
+ '(inf-clojure-tools-deps-cmd "planck -c src")
  '(linum-format "%4d │")
  '(markdown-command "multimarkdown")
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (terraform-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
+    (inf-clojure terraform-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
