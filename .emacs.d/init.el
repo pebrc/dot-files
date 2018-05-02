@@ -15,9 +15,6 @@
  tab-width 4
  c-basic-offset 4)
 
-;; modes
-(electric-indent-mode +1)
-
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
 
@@ -161,6 +158,10 @@
 (load-library "ekeys")
 (load-library "hooks")
 
+;; modes
+(electric-indent-mode +1)
+(ido-mode 1)
+(ido-everywhere 1)
 
 
 (custom-set-variables
@@ -168,6 +169,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ensime-sbt-perform-on-save "compile")
  '(ensime-typecheck-idle-interval 1.5)
  '(gnutls-trustfiles
    (quote
@@ -178,9 +180,14 @@
  '(linum-format "%4d │")
  '(markdown-command "multimarkdown")
  '(menu-bar-mode nil)
+ '(org-babel-load-languages (quote ((scala . t))))
+ '(org-confirm-babel-evaluate nil)
  '(package-selected-packages
    (quote
-    (inf-clojure terraform-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
+    (org-tree-slide-mode org-tree-slide flycheck-rust toml-mode rust-mode company-go flycheck go-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
+ '(racer-rust-src-path
+   "/Users/p_brc/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
+ '(rust-format-on-save t)
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
