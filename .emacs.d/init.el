@@ -152,6 +152,26 @@
   (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
   (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
 
+(use-package flx-ido
+  :demand
+  :init
+  (setq
+   ido-enable-flex-matching t
+   ;; C-d to open directories
+   ;; C-f to revert to find-file
+   ido-show-dot-for-dired nil
+   ido-enable-dot-prefix t)
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1))
+
+(use-package projectile
+  :demand
+  :init   (setq projectile-use-git-grep t)
+  :config (projectile-global-mode t)
+  :bind   (("s-f" . projectile-find-file)
+           ("s-F" . projectile-grep)))
 ;;
 ;; Customizations
 
@@ -160,8 +180,7 @@
 
 ;; modes
 (electric-indent-mode +1)
-(ido-mode 1)
-(ido-everywhere 1)
+
 
 
 (custom-set-variables
