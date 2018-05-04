@@ -207,7 +207,8 @@
  '(racer-rust-src-path
    "/Users/p_brc/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
  '(rust-format-on-save t)
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
