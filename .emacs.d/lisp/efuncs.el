@@ -99,3 +99,10 @@
 	  (if this-win-2nd (other-window 1))))))
 
 (global-set-key (kbd "C-x |") 'toggle-window-split)
+
+(defun scalafmt-file ()
+  (interactive)
+  (let ((str (concat "scalafmt -f \"" buffer-file-name "\"" " -i")))
+    (message str)
+    (shell-command-to-string str))
+  (message "scalafmt done"))

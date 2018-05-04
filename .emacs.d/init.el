@@ -74,7 +74,9 @@
   :config (exec-path-from-shell-initialize))
 (use-package markdown-mode)
 (use-package ensime
-  :pin melpa-stable)
+  :pin melpa-stable
+  :bind (:map ensime-mode-map
+              ("C-c C-v f" . scalafmt-file)))
 
 (use-package scala-mode
   :interpreter
