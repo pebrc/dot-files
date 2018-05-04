@@ -89,6 +89,7 @@
 (use-package json-mode)
 (use-package restclient)
 (use-package racer)
+(use-package flycheck-rust)
 (use-package rust-mode
   :bind (:map rust-mode-map
               ("TAB" . company-indent-or-complete-common))
