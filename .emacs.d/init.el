@@ -39,9 +39,7 @@
 (add-to-list 'load-path' "~/.emacs.d/lisp")
 (load-library "efuncs")
 
-
-;;(ace-jump-mode auto-complete better-defaults clj-refactor clojure-cheatsheet closure-lint-mode dash-at-point edn elisp-slime-nav ensime company exec-path-from-shell find-file-in-project groovy-mode helm helm-core idle-highlight-mode ido-ubiquitous ido-completing-read+ inflections js2-mode magit git-commit magit-popup markdown-mode+ markdown-mode modeline-posn multiple-cursors paradox hydra paredit peg popup rainbow-delimiters s sbt-mode scala-mode scala-mode2 smex swiper ivy typed-clojure-mode cider seq spinner queue pkg-info epl clojure-mode which-key window-numbering with-editor dash async yasnippet)
-
+(set-frame-font "Menlo 14")
 
 (use-package ace-window)
 (use-package cider
