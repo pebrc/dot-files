@@ -98,6 +98,8 @@
   (add-hook 'racer-mode-hook #'eldoc-mode))
 (use-package go-mode
   :ensure t
+  :init
+  (setq gofmt-command "goimports")
   :bind (:map go-mode-map
          ("M-." . godef-jump))
   :config
