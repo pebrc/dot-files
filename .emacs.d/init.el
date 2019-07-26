@@ -6,7 +6,7 @@
  shell-file-name "/bin/bash"
  org-directory "~/Dropbox/org"
  lispy-modes '(scheme emacs-lisp lisp clojure clojurescript cider-repl)
- inf-clojure-program "planck"
+; inf-clojure-program "planck"
 )
 
 ;; buffer local variables
@@ -40,6 +40,33 @@
 (load-library "efuncs")
 
 (set-frame-font "Menlo 14")
+
+
+
+(use-package helm
+  :ensure t
+  :bind (("M-a" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x f" . helm-recentf)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x b" . helm-buffers-list))
+  :bind (:map helm-map
+	      ("M-i" . helm-previous-line)
+	      ("M-k" . helm-next-line)
+	      ("M-I" . helm-previous-page)
+	      ("M-K" . helm-next-page)
+	      ("M-h" . helm-beginning-of-buffer)
+	      ("M-H" . helm-end-of-buffer))
+  :config (progn
+	    (setq helm-buffers-fuzzy-matching t)
+        (helm-mode 1)))
+
+(use-package helm-descbinds
+  :ensure t
+  :bind ("C-h b" . helm-descbinds))
+
+
+
 
 (use-package ace-window)
 (use-package cider
@@ -77,6 +104,7 @@
               ("C-c C-v f" . scalafmt-file)))
 
 (use-package scala-mode
+  :mode ("\\.\\(scala\\|sbt|sc\\)\\'" . scala-mode)
   :interpreter
   ("scala" . scala-mode))
 
@@ -85,6 +113,8 @@
 
 (use-package multiple-cursors)
 (use-package json-mode)
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
 (use-package restclient)
 (use-package racer)
 (use-package flycheck-rust)
@@ -96,14 +126,18 @@
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
+(use-package go-guru)
 (use-package go-mode
   :ensure t
   :init
+  (setq company-dabbrev-downcase nil)
   (setq gofmt-command "goimports")
   :bind (:map go-mode-map
          ("M-." . godef-jump))
   :config
-  (add-hook 'before-save-hook #'gofmt-before-save))
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
+  (add-hook 'go-mode-hook #'gorepl-mode))
 
 (use-package flycheck
   :ensure t
@@ -173,8 +207,10 @@
   :demand
   :init   (setq projectile-use-git-grep t)
   :config (projectile-global-mode t)
-  :bind   (("s-f" . projectile-find-file)
-           ("s-F" . projectile-grep)))
+  :bind   (("H-f" . projectile-find-file)
+           ("H-F" . projectile-grep)))
+
+(use-package yaml-mode)
 ;;
 ;; Customizations
 
@@ -191,14 +227,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(custom-enabled-themes (quote (misterioso)))
  '(ensime-sbt-perform-on-save "compile")
+ '(ensime-startup-notification nil)
  '(ensime-typecheck-idle-interval 1.5)
- '(gnutls-trustfiles
-   (quote
-    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/Users/p_brc/Desktop/elastic-ce-aws.crt")))
  '(gnutls-verify-error (quote ((".*" nil))))
- '(inf-clojure-lein-cmd "planck -c src")
- '(inf-clojure-tools-deps-cmd "planck -c src")
+ '(go-play-browse-function (quote browse-url))
  '(linum-format "%4d │")
  '(markdown-command "multimarkdown")
  '(menu-bar-mode nil)

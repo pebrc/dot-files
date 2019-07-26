@@ -1,10 +1,37 @@
 ;;(global-set-key (kbd "C-`")  'cider-eval-expression-at-point-in-repl)
 
 (global-set-key (kbd "<f5>") 'replace-last-sexp)
-(global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;;; emacs-mac
+
+(global-set-key [(hyper a)] 'mark-whole-buffer)
+(global-set-key [(hyper v)] 'yank)
+(global-set-key [(hyper c)] 'kill-ring-save)
+(global-set-key [(hyper s)] 'save-buffer)
+(global-set-key [(hyper l)] 'goto-line)
+(global-set-key [(hyper w)]
+                (lambda () (interactive) (delete-window)))
+(global-set-key [(hyper z)] 'undo)
+
+;; mac switch meta key
+(defun mac-switch-meta nil 
+  "switch meta between Option and Command"
+  (interactive)
+  (if (eq mac-option-modifier nil)
+      (progn
+	(setq mac-option-modifier 'meta)
+	(setq mac-command-modifier 'hyper)
+	)
+    (progn 
+      (setq mac-option-modifier nil)
+      (setq mac-command-modifier 'meta)
+      )
+    )
+)
 
 ;;Mac OS X iterm/tmux weirdness
 (when (and (string= "darwin" system-type)
