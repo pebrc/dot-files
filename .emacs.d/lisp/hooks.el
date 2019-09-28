@@ -1,5 +1,6 @@
 (global-company-mode)
 (global-auto-revert-mode t)
+(require 'dired-x)
 
 (when (and (string= "darwin" system-type)
            (not (memq window-system '(mac ns))))
