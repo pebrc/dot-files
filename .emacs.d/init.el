@@ -70,6 +70,8 @@
   :bind ("C-h b" . helm-descbinds))
 
 (use-package ace-window)
+(use-package auctex)
+(use-package inf-clojure)
 (use-package cider
   :defer t)
 (use-package elisp-slime-nav
@@ -142,6 +144,8 @@
 (use-package go-flycheck
   :load-path "~/go/src/github.com/dougm/goflymake"
   :commands goflymake)
+
+(use-package gotest)
 
 (use-package flycheck
   :ensure t
@@ -247,7 +251,7 @@
  '(org-confirm-babel-evaluate nil)
  '(package-selected-packages
    (quote
-    (inf-clojure esup go-fill-struct expand-region evil-magit adoc-mode flymake-yaml flycheck-yamllint fish-mode magithub helm-files helm-descbinds helm dockerfile-mode auctex gorepl-mode gotest go-add-tags go-eldoc go-gen-test go-guru go-imports go-rename go-scratch go-tag slack switch-buffer-functions jinja2-mode yaml-mode org-tree-slide-mode org-tree-slide flycheck-rust toml-mode rust-mode company-go flycheck go-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
+    (flycheck-golangci-lint command-log-mode auctex inf-clojure esup go-fill-struct expand-region evil-magit adoc-mode flymake-yaml flycheck-yamllint fish-mode magithub helm-files helm-descbinds helm dockerfile-mode gorepl-mode gotest go-add-tags go-eldoc go-gen-test go-guru go-imports go-rename go-scratch go-tag slack switch-buffer-functions jinja2-mode yaml-mode org-tree-slide-mode org-tree-slide flycheck-rust toml-mode rust-mode company-go flycheck go-mode ace-window multiple-cursors restclient projectile popup-imenu ensime json-mode markdown-mode ace-jump-mode)))
  '(racer-rust-src-path
    "/Users/p_brc/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
  '(rust-format-on-save t)
