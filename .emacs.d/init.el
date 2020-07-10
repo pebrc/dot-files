@@ -70,7 +70,8 @@
   :bind ("C-h b" . helm-descbinds))
 
 (use-package ace-window)
-(use-package auctex)
+(use-package tex-mode
+  :ensure auctex)
 (use-package inf-clojure)
 (use-package cider
   :defer t)
